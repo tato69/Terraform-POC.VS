@@ -1,5 +1,5 @@
 resource "azurerm_resource_group" "test" {
-  name     = "Terraform-POC.domainjoin"
+  name     = "Terraform-POC.VS"
   location = "West US 2"
 }
 
