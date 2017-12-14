@@ -77,46 +77,6 @@ resource "azurerm_virtual_machine" "test" {
 os_profile_windows_config {
     provision_vm_agent = "True"
 }
-
-}
- depends_on            = ["azurerm_virtual_machine_extension.customscript"]
-  name                  = "acctvm3"
-  location              = "West US 2"
-  resource_group_name   = "${azurerm_resource_group.test.name}"
-  network_interface_ids = ["${azurerm_network_interface.test3.id}"]
-  vm_size               = "Standard_B1ms"
-
-  storage_image_reference {
-    publisher = "MicrosoftWindowsServer"
-    offer     = "WindowsServer"
-    sku       = "2012-R2-Datacenter"
-    version   = "latest"
-  }
-
-  # Uncomment this line to delete the OS disk automatically when deleting the VM
-   delete_os_disk_on_termination = true
-
-  storage_os_disk {
-    name              = "myosdisk3"
-    caching           = "ReadWrite"
-    create_option     = "FromImage"
-    managed_disk_type = "Standard_LRS"
-  }
-
-  os_profile {
-    computer_name  = "hostname2"
-    admin_username = "myadmin"
-    admin_password = "Password123"
-  }
-
-
-os_profile_windows_config {
-    provision_vm_agent = "True"
-}
-
-  tags {
-    environment = "staging"
-  }
 }
 
 resource "azurerm_virtual_machine_extension" "choco" {
